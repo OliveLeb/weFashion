@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WeFashion</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 </head>
 <body>
     <div class="container-fluid">
         <div class="col-md-12">
             @include('partials.menu')
         </div>
-        <div class="row">
+        <main class="row">
             <div class="col-md-12">
                 @yield('content')
             </div>
-        </div>
+        </main>
+        @include('partials.footer')
     </div>
     <script src="{{asset('js/app.js')}}"></script>
 </body>

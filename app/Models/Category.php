@@ -14,6 +14,15 @@ class Category extends Model
         'category'
     ];
 
+    public function setCategoryAttribute($value) {
+        if($value == 'female') {
+            $this->attributes['category'] = 'Femme';
+        }
+        else {
+            $this->attributes['category'] = 'Homme';
+        }
+    }
+
     public function products() {
         return $this->belongsToMany(Product::class);
     }

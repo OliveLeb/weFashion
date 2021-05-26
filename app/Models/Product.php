@@ -15,6 +15,10 @@ class Product extends Model
         'name','description','price','size','is_discounted','is_published','reference'
     ];
 
+    public function scopePublished($query) {
+        return $query->where('is_published',true);
+    }
+
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
