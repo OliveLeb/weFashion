@@ -24,4 +24,4 @@ Route::get('products/{id}',[FrontController::class,'showProductsByCategory'])->n
 Auth::routes();
 
 // admin routes
-Route::get('admin/products',[ProductController::class],['as'=>'admin'])->middleware('auth');
+Route::resource('admin/products',ProductController::class,['as'=>'admin'])->middleware('auth');
