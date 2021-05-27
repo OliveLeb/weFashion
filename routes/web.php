@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,13 @@ use App\Http\Controllers\FrontController;
 |
 */
 
+// front routes
 Route::get('/', [FrontController::class,'index'])->name('home');
 Route::get('products/discount',[FrontController::class,'showDiscountedProducts'])->name('discount.products');
 Route::get('product/{id}',[FrontController::class,'show'])->name('show.product');
 Route::get('products/{id}',[FrontController::class,'showProductsByCategory'])->name('category.products');
+
+Auth::routes();
+
+// admin routes
+Route::get('admin/products',[ProductController::class],['as'=>'admin'])->middleware('auth');

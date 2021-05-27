@@ -2,22 +2,26 @@ ul {
     list-style: none;
 }
 
+main {
+    min-height: calc(100vh - 160px);
+}
+
 .logo {
     color: #66eb9a !important;
     text-transform: uppercase;
     font-weight: bold;
 }
 
+/***** PRODUCT CARD ****/
 .img-container {
     width: 100%;
-    height: 250px;
+    height: 200px;
     text-align: center;
 }
-img {
+.img-container img {
     height: 100%;
     width: auto;
 }
-
 .discount {
     position: absolute;
     top: 5px;
@@ -37,4 +41,21 @@ img {
     position: absolute;
     bottom: -7px;
     right: 0;
+}
+
+.no-data {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/***** PRODUCT DETAIL **/
+
+.product-detail img {
+    width: 100%;
+    height: auto;
+}
+.product-detail button {
+    color: #66eb9a;
 }

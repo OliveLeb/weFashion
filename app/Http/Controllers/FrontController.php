@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class FrontController extends Controller
     public function __construct() {
         view()->composer('partials.menu',function($view) {
             $categories = Category::pluck('category','id')->all();
-            $view->with('categories',$categories);
+            $view->with('categories' , $categories);
         });
     }
 
@@ -25,14 +26,14 @@ class FrontController extends Controller
 
     // FETCH ONE PRODUCT BY PRODUCT'S ID
     public function show(int $id) {
-        $product = Product::find($id)->with('picture');
+        $product = Product::find($id);
         return view('front.show',['product' => $product]);
     }
 
     // FETCH PUBLISHED PRODUCTS BY CATEGORY'S NAME WITH PICTURE
     public function showProductsByCategory(int $id) {
-        $cat = Category::find($id);
-        $products = $cat->products()->published()->with('picture')->paginate(6);
+        $category = Category::find($id);
+        $products = $category->products()->published()->with('picture')->paginate(6);
         return view('front.index',['products' => $products]);
     }
 

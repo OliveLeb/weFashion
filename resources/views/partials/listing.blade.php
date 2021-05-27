@@ -1,5 +1,12 @@
+{{-- @php
+    dd($products->total);
+@endphp --}}
+
+
+@if (count($products) !== 0)
+
 <ul class='row'>
-    @forelse ($products as $product)
+    @foreach ($products as $product)
         <li class='col-md-4'>
             <div class="card my-3 p-2">
                 @if ($product->is_discounted)
@@ -15,9 +22,14 @@
                     <span>{{$product->price}} €</span>
                 </div>
             </div>
-
         </li>
-    @empty
-        <li>Aucun produit</li>
-    @endforelse
+    @endforeach
 </ul>
+
+@else
+
+<div class='no-data'>
+    <p>Oups ! Aucun produit ne correspond à votre recherche.</p>
+</div>
+
+@endif

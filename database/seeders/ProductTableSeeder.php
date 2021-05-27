@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,10 @@ class ProductTableSeeder extends Seeder
         ->count(80)
         ->create()->each(function($product) {
 
+            // get random array of sizes for the product
+            $sizes = Size::pluck('id')->shuffle()->slice(0,rand(1,5))->all();
+            $product->sizes()->attach($sizes);
+
             // get the category and add the right type of picture
             $category = Category::pluck('id')->shuffle()->shift();
             $product->categories()->attach($category);
@@ -36,10 +41,6 @@ class ProductTableSeeder extends Seeder
                 'title'=>$product->name,
                 'link' => $link
             ]);
-
-            $sizes = collect(['XS','S','M','L','XL']);
-            $availableSize = $sizes->shuffle()->shift();
-            $product->size = $availableSize;
 
             $product->save();
         });

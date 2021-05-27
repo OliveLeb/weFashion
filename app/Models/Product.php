@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Size;
 use App\Models\Picture;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','description','price','size','is_discounted','is_published','reference'
+        'name','description','price','is_discounted','is_published','reference'
     ];
 
     public function scopePublished($query) {
@@ -25,6 +26,10 @@ class Product extends Model
 
     public function picture(){
         return $this->hasOne(Picture::class);
+    }
+
+    public function sizes() {
+        return $this->belongsToMany(Size::class);
     }
 
     public $timestamps = false;

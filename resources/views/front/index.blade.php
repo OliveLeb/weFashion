@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container">
+<section class="container h-100">
     @include('partials.listing')
-</div>
+</section>
 
 {{$products->links()}}
 
