@@ -18,7 +18,8 @@
                 @yield('content')
             </div>
         </main>
-        @include('partials.footer')
+
+        @includeWhen($showFooter,'partials.footer')
 
     <script src="{{asset('js/app.js')}}"></script>
 </body>
