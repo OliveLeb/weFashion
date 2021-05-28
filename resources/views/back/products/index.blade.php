@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a class="btn btn-primary mb-3" href="{{route('admin.products.create')}}">Ajouter un livre</a>
+<a class="btn btn-primary mb-3" href="{{route('admin.products.create')}}">Ajouter un produit</a>
 
 {{$products->links()}}
 
@@ -35,7 +35,7 @@
             </td>
             <td>{{$product->price}} €</td>
             <td>
-                lol
+                {{$product->is_discounted}}
             </td>
             <td><a href="{{route('admin.products.edit',$product->id)}}"><i class="fas fa-edit text-primary"></i></a></td>
             <td><a href="{{route('admin.products.show',$product->id)}}"><i class="fas fa-eye text-primary"></i></a></td>

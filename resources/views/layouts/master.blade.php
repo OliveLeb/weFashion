@@ -10,17 +10,16 @@
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="col-md-12">
+        <header class="container mx-5">
             @include('partials.menu')
-        </div>
-        <main class="row">
+        </header>
+        <main class="container-fluid py-5">
             <div class="col-md-12">
                 @yield('content')
             </div>
         </main>
         @include('partials.footer')
-    </div>
+
     <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

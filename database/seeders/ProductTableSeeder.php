@@ -29,11 +29,7 @@ class ProductTableSeeder extends Seeder
             $category = Category::pluck('id')->shuffle()->shift();
             $product->categories()->attach($category);
 
-            if($category == '1') {
-                $file = Storage::disk('local')->files('hommes');
-            }else {
-                $file = Storage::disk('local')->files('femmes');
-            }
+            $file = Storage::disk('local')->files($category == '1' ? 'hommes' : 'femmes');
 
             $link = collect($file)->shuffle()->shift();
 

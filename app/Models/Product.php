@@ -20,6 +20,15 @@ class Product extends Model
         return $query->where('is_published',true);
     }
 
+    public function getIsDiscountedAttribute($value) {
+        if($value == 0) {
+            return 'Standard';
+        }
+        else {
+            return 'Soldé';
+        }
+    }
+
     public function categories(){
         return $this->belongsToMany(Category::class);
     }

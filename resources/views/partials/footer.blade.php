@@ -11,8 +11,12 @@
             <li><a href="#">Conditions de vente</a></li>
         </ul>
         <ul class="col-md-4 list-group">
-            <li><a href="#">icone fb</a></li>
-            <li><a href="#">icone insta</a></li>
+            <li>
+                <ul class="social-network">
+                    <li><a href="#"><img src="{{asset('images/logo/facebook.png')}}" alt=""></i></a></li>
+                    <li><a href="#"><img src="{{asset('images/logo/Instagram.png')}}" alt=""></a></li>
+                </ul>
+            </li>
             <li><a href="#">Inscrivez vous à la newsletter</a></li>
         </ul>
     </div>

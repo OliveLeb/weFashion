@@ -1,15 +1,28 @@
 ul {
     list-style: none;
 }
+a,
+a:hover {
+    text-decoration: none;
+}
 
 main {
     min-height: calc(100vh - 160px);
 }
 
-.logo {
+/****** HEADER *****/
+header {
+    font-size: 16px;
+}
+header .logo {
     color: #66eb9a !important;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 20px;
+}
+/**** PAGINATION ****/
+.pagination {
+    justify-content: flex-end;
 }
 
 /***** PRODUCT CARD ****/
@@ -57,5 +70,30 @@ main {
     height: auto;
 }
 .product-detail button {
-    color: #66eb9a;
+    color: #fff;
+    background-color: #66eb9a;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/**************** BACKEND *********************/
+.error {
+    color: #ff0000;
+    font-style: italic;
+}
+
+/***** FOOTER ****/
+.social-network {
+    padding: 0;
+    display: flex;
+}
+.social-network li:first-child {
+    margin-right: 10px;
+}
+.social-network li:last-child {
+    margin-left: 10px;
+}
+.social-network img {
+    width: 29px;
+    height: 29px;
 }
