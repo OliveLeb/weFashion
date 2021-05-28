@@ -6,6 +6,7 @@ use App\Models\Size;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
@@ -75,7 +76,7 @@ class ProductController extends Controller
             'title' => $request->name
         ]);
 
-        return redirect()->route('back.products.index')->with('succes' , 'Produit correctement ajouté !');
+        return redirect()->route('admin.products.index')->with('success' , 'Produit correctement ajouté !');
     }
 
     /**
@@ -86,7 +87,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('back.products.show',['product' => $product]);
     }
 
     /**
@@ -120,6 +121,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Storage::disk('local')->delete($product->picture->link);
+        $product->delete();
+        return redirect()->route('admin.products.index')->with('success' , 'Produit supprimé avec succès !');
     }
 }

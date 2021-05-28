@@ -38,7 +38,7 @@
                 {{$product->is_discounted}}
             </td>
             <td><a href="{{route('admin.products.edit',$product->id)}}"><i class="fas fa-edit text-primary"></i></a></td>
-            <td><a href="{{route('admin.products.show',$product->id)}}"><i class="fas fa-eye text-primary"></i></a></td>
+            <td><a href="{{route('admin.products.show',$product)}}"><i class="fas fa-eye text-primary"></i></a></td>
             <td>
             <form action="{{route('admin.products.destroy',$product->id)}}" method="POST" class="delete">
                 @csrf
