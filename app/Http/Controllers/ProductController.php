@@ -41,7 +41,40 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request->all());
+
+        // dd($request->all());
+        $product = Product::create($request->all());
+        $product->sizes()->attach($request->sizes);
+        $product->categories()->attach($request->categories);
+
+        // get the picture
+        $img = $request->file('picture');
+
+        // rename the picture
+        if(!empty($img)){
+            $imgFullName = $img->getClientOriginalName();
+            $imgName = pathinfo($imgFullName, PATHINFO_FILENAME);
+            $imgExtension = $img->getClientOriginalExtension();
+            $file = time() . '_' . $imgName . '.' . $imgExtension;
+        }
+
+        // choose the right folder
+        switch(count($request->categories)){
+            case '1':
+                $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
+                break;
+            case '2':
+                $imgFolder = 'unisex';
+                break;
+        }
+        // store the picture
+        $img->storeAs( $imgFolder ,$file);
+        // create in DB
+        $product->picture()->create([
+            'link' => $imgFolder.'/'.$file,
+            'title' => $request->name
+        ]);
+
         return redirect()->route('back.products.index')->with('succes' , 'Produit correctement ajouté !');
     }
 

@@ -30,7 +30,7 @@
             <td><a href="{{route('admin.products.edit',$product->id)}}">{{$product->name}}</a></td>
             <td>
                 @foreach ($product->categories as $category)
-                    {{$category->category}}
+                    {{$category->category}},
                 @endforeach
             </td>
             <td>{{$product->price}} €</td>

@@ -16,6 +16,7 @@ class Product extends Model
         'name','description','price','is_discounted','is_published','reference'
     ];
 
+    // get only published products
     public function scopePublished($query) {
         return $query->where('is_published',true);
     }
@@ -27,6 +28,11 @@ class Product extends Model
         else {
             return 'Soldé';
         }
+    }
+
+    // put the ref uppercase
+    public function setReferenceAttribute($value) {
+        $this->attributes['reference'] = strtoupper($value);
     }
 
     public function categories(){

@@ -22,6 +22,11 @@
                 <input type="number" class="form-control" name="price" id="" step="0.01">
                 @if($errors->price) <span class="error">{{$errors->first('price')}}</span> @endif
             </div>
+            <div class="form-group">
+                <label for="reference">Référence : <sup class="error">*</sup></label>
+                <input type="text" class="form-control" name="reference" id="">
+                @if($errors->reference) <span class="error">{{$errors->first('reference')}}</span> @endif
+            </div>
         </section>
         <section class="col-md-6">
 

@@ -29,8 +29,10 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|string|max:100',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'reference' => 'required|string|size:16',
             'sizes' => ['required','array',Rule::in(['1','2','3','4','5'])],
             'categories' => 'required',
+            'picture' => 'image',
             'is_discounted' => 'required|boolean',
             'is_published' => 'required|boolean'
         ];
