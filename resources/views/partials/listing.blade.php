@@ -4,7 +4,7 @@
 
 
 @if (count($products) !== 0)
-
+<div class='products-count'>{{$products->total()}} résultats</div>
 <ul class='row'>
     @foreach ($products as $product)
         <li class='col-md-4'>

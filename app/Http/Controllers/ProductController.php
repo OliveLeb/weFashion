@@ -121,7 +121,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // delete the picture
         Storage::disk('local')->delete($product->picture->link);
+        // delete the product from table with categories and sizes
         $product->delete();
         return redirect()->route('admin.products.index')->with('success' , 'Produit supprimé avec succès !');
     }

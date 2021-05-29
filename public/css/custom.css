@@ -24,7 +24,10 @@ header .logo {
 .pagination {
     justify-content: flex-end;
 }
-
+.products-count {
+    text-align: right;
+    color: #959595;
+}
 /***** PRODUCT CARD ****/
 .img-container {
     width: 100%;
