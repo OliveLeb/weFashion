@@ -29,9 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $sizes = Size::all();
-        $categories = Category::all();
-        return view('back.products.create',['sizes' => $sizes , 'categories' => $categories]);
+        return view('back.products.create');
     }
 
     /**
@@ -43,36 +41,45 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-        // dd($request->all());
-        $product = Product::create($request->all());
-        $product->sizes()->attach($request->sizes);
-        $product->categories()->attach($request->categories);
-
         // get the picture
         $img = $request->file('picture');
 
-        // rename the picture
+        // if no img -> is_published = false (protection in case disabled attribute is removed)
+        $request->is_published = empty($img) ? false : true;
+
+        // create product in DB
+        $product = Product::create($request->all());
+        // link it to the sizes
+        $product->sizes()->attach($request->sizes);
+        // link it to the categories
+        $product->categories()->attach($request->categories);
+
+        // if there is an image do :
         if(!empty($img)){
+
+            // choose the right folder
+            switch(count($request->categories)){
+                case '1':
+                    $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
+                    break;
+                case '2':
+                    $imgFolder = 'unisex';
+                    break;
+            }
+
+            // rename the picture
             $imgFullName = $img->getClientOriginalName();
             $imgName = pathinfo($imgFullName, PATHINFO_FILENAME);
             $imgExtension = $img->getClientOriginalExtension();
             $file = time() . '_' . $imgName . '.' . $imgExtension;
-        }
+            $link = $imgFolder.'/'.$file;
 
-        // choose the right folder
-        switch(count($request->categories)){
-            case '1':
-                $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
-                break;
-            case '2':
-                $imgFolder = 'unisex';
-                break;
+            // store the picture
+            $img->storeAs( $imgFolder ,$file);
         }
-        // store the picture
-        $img->storeAs( $imgFolder ,$file);
-        // create in DB
+        // create image in DB
         $product->picture()->create([
-            'link' => $imgFolder.'/'.$file,
+            'link' => $link ?? null,
             'title' => $request->name
         ]);
 
@@ -98,19 +105,68 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('back.products.edit',['product' => $product]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreProductRequest  $request
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        //
+        // dd($request->all());
+         // get the picture
+        $img = $request->file('picture');
+
+        // if no img -> is_published = false (protection in case disabled attribute is removed)
+        $request->is_published = empty($img) ? false : true;
+
+        // create product in DB
+        $product->update($request->all());
+        // link it to the sizes
+        $product->sizes()->sync($request->sizes);
+        // link it to the categories
+        $product->categories()->sync($request->categories);
+
+        // if there is an image do :
+        if(!empty($img)){
+
+            // delete previous picture if exists
+            if($product->picture->link) {
+                Storage::disk('local')->delete($book->picture->link);
+                $book->picture()->delete();
+            }
+
+            // choose the right folder
+            switch(count($request->categories)){
+                case '1':
+                    $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
+                    break;
+                case '2':
+                    $imgFolder = 'unisex';
+                    break;
+            }
+
+            // rename the picture
+            $imgFullName = $img->getClientOriginalName();
+            $imgName = pathinfo($imgFullName, PATHINFO_FILENAME);
+            $imgExtension = $img->getClientOriginalExtension();
+            $file = time() . '_' . $imgName . '.' . $imgExtension;
+            $link = $imgFolder.'/'.$file;
+
+            // store the picture
+            $img->storeAs( $imgFolder ,$file);
+        }
+        // create image in DB
+        $product->picture()->update([
+            'link' => $link ?? null,
+            'title' => $request->name
+        ]);
+
+        return redirect()->route('admin.products.index')->with('success' , 'Produit modifié avec succès !');
     }
 
     /**
@@ -121,8 +177,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // delete the picture
-        Storage::disk('local')->delete($product->picture->link);
+        // delete the picture if exists
+        if($product->picture->link) {
+            Storage::disk('local')->delete($product->picture->link);
+        }
         // delete the product from table with categories and sizes
         $product->delete();
         return redirect()->route('admin.products.index')->with('success' , 'Produit supprimé avec succès !');

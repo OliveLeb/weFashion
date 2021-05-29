@@ -37,4 +37,11 @@ class StoreProductRequest extends FormRequest
             'is_published' => 'required|boolean'
         ];
     }
+
+    // public function messages()
+    // {
+    //     return [
+    //         ''
+    //     ]
+    // }
 }

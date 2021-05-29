@@ -35,7 +35,7 @@
             </td>
             <td>{{$product->price}} €</td>
             <td>
-                {{$product->is_discounted}}
+                {{$product->is_discounted ? 'Soldé' : 'Stantard'}}
             </td>
             <td><a href="{{route('admin.products.edit',$product->id)}}"><i class="fas fa-edit text-primary"></i></a></td>
             <td><a href="{{route('admin.products.show',$product)}}"><i class="fas fa-eye text-primary"></i></a></td>

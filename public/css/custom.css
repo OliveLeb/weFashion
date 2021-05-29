@@ -84,7 +84,10 @@ header .logo {
     color: #ff0000;
     font-style: italic;
 }
-
+img {
+    width: 100%;
+    height: auto;
+}
 /***** FOOTER ****/
 .social-network {
     padding: 0;

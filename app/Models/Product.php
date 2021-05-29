@@ -21,15 +21,6 @@ class Product extends Model
         return $query->where('is_published',true);
     }
 
-    public function getIsDiscountedAttribute($value) {
-        if($value == 0) {
-            return 'Standard';
-        }
-        else {
-            return 'Soldé';
-        }
-    }
-
     // put the ref uppercase
     public function setReferenceAttribute($value) {
         $this->attributes['reference'] = strtoupper($value);
