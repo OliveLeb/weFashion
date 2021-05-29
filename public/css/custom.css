@@ -20,6 +20,21 @@ header .logo {
     font-weight: bold;
     font-size: 20px;
 }
+/******** MENU *******/
+.go-to,
+.log-out {
+    padding: 2px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.go-to {
+    color: #66eb9a;
+    border: 1px solid #50bb7a;
+}
+.log-out {
+    color: #a80000;
+    border: 1px solid #a80000;
+}
 /**** PAGINATION ****/
 .pagination {
     justify-content: flex-end;
