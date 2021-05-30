@@ -5,28 +5,31 @@
 <article class="row product-detail">
 
     <div class="col-md-6">
-        <img src="{{asset('images/'.$product->picture->link)}}" alt="" >
+        <div>
+            <img src="{{asset('images/'.$product->picture->link)}}" alt="" >
+        </div>
     </div>
     <div class="col-md-6">
         <h2>{{$product->name}}</h2>
-        <p>{{$product->description}}</p>
-        <p>{{$product->price}} €</p>
+        <p class="my-5">{{$product->description}}</p>
+        <p class="my-5">{{$product->price}} €</p>
         @if ($product->is_discounted)
-            En solde !
+            <p>En solde !</p>
         @endif
-        <form action="">
+        <form action="#" class="d-flex flex-column">
             @csrf
-            <select name="" id="">
+            <select class="form-select my-5">
                 <option value="" disabled selected>Taille</option>
                 @foreach ($product->sizes as $size)
                  <option value="{{$size->id}}">{{$size->size}}</option>
                 @endforeach
             </select>
+            <button type="submit" class="btn">Acheter</button>
         </form>
-        <button type="button" class="btn">Acheter</button>
     </div>
 
 
 </article>
+
 
 @endsection
