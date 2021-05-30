@@ -5,7 +5,10 @@ a,
 a:hover {
     text-decoration: none;
 }
-
+html,
+body {
+    min-height: 100vh;
+}
 main {
     min-height: calc(100vh - 160px);
 }
@@ -102,6 +105,10 @@ header .logo {
 img {
     width: 100%;
     height: auto;
+}
+.admin-title {
+    display: flex;
+    justify-content: space-between;
 }
 /***** FOOTER ****/
 .social-network {

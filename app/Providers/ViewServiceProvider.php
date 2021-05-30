@@ -27,8 +27,12 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         // send categories to menu, create and update views
-        view()->composer(['partials.menu','back.products.create','back.products.edit'],function($view) {
+        view()->composer(['partials.menu','back.products.*'],function($view) {
             $categories = Category::pluck('category','id')->all();
+            $view->with('categories' , $categories);
+        });
+        view()->composer(['back.categories.index'],function($view) {
+            $categories = Category::all();
             $view->with('categories' , $categories);
         });
 

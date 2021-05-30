@@ -15,8 +15,8 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            ['category' => 'male'],
-            ['category' => 'female']
+            ['category' => 'homme'],
+            ['category' => 'femme']
         ]);
     }
 }

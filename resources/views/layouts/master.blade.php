@@ -11,7 +11,7 @@
     <link rel="icon" href="{{asset('images/logo/shirt.ico')}}" type="image/x-icon">
 </head>
 <body>
-        <header class="container mx-5">
+        <header class="container">
             @include('partials.menu')
         </header>
         <main class="container-fluid py-5">

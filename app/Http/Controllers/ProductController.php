@@ -40,7 +40,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-
+        // dd($request->all());
         // get the picture
         $img = $request->file('picture');
 
@@ -60,10 +60,10 @@ class ProductController extends Controller
             // choose the right folder
             switch(count($request->categories)){
                 case '1':
-                    $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
+                    $imgFolder = strtolower(Category::find('id')->category).'s';
                     break;
                 case '2':
-                    $imgFolder = 'unisex';
+                    $imgFolder = 'multicategorie';
                     break;
             }
 
@@ -117,12 +117,11 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, Product $product)
     {
-        // dd($request->all());
          // get the picture
         $img = $request->file('picture');
 
         // if no img -> is_published = false (protection in case disabled attribute is removed)
-        $request->is_published = empty($img) ? false : true;
+        $request->is_published = (empty($img) && !$product->picture->link) ? false : true;
 
         // create product in DB
         $product->update($request->all());
@@ -143,10 +142,10 @@ class ProductController extends Controller
             // choose the right folder
             switch(count($request->categories)){
                 case '1':
-                    $imgFolder = $request->categories[0] == '1' ? 'hommes' : 'femmes';
+                    $imgFolder = strtolower(Category::find('id')->category).'s';
                     break;
                 case '2':
-                    $imgFolder = 'unisex';
+                    $imgFolder = 'multicategorie';
                     break;
             }
 
@@ -159,12 +158,14 @@ class ProductController extends Controller
 
             // store the picture
             $img->storeAs( $imgFolder ,$file);
+
+            // create image in DB
+            $product->picture()->update([
+                'link' => $link ?? null,
+                'title' => $request->name
+            ]);
         }
-        // create image in DB
-        $product->picture()->update([
-            'link' => $link ?? null,
-            'title' => $request->name
-        ]);
+
 
         return redirect()->route('admin.products.index')->with('success' , 'Produit modifié avec succès !');
     }

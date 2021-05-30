@@ -38,10 +38,4 @@ class StoreProductRequest extends FormRequest
         ];
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         ''
-    //     ]
-    // }
 }

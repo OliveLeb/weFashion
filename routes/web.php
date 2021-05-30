@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,10 @@ Route::get('products/{id}',[FrontController::class,'showProductsByCategory'])->n
 Auth::routes();
 
 // admin routes
-Route::resource('admin/products',ProductController::class,['as'=>'admin'])->middleware('auth');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function() {
+    Route::resource('products',ProductController::class);
+    Route::resource('categories',CategoryController::class);
+});
+
+    // Route::resource('admin/products',ProductController::class,['as'=>'admin'])->middleware('auth');
+    // Route::resource('admin/categories',CategoryController::class,['as'=>'admins'])->middleware('auth');

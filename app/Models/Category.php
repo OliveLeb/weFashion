@@ -15,15 +15,13 @@ class Category extends Model
     ];
 
     public function getCategoryAttribute($value) {
-        if($value == 'female') {
-            return 'Femme';
-        }
-        else {
-            return 'Homme';
-        }
+            return ucfirst($value);
     }
 
     public function products() {
         return $this->belongsToMany(Product::class);
     }
+
+    public $timestamps = false;
+
 }

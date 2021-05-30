@@ -17,15 +17,14 @@
                     <a class="nav-link" href="{{route('admin.products.index')}}">Produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Catégories</a>
+                    <a class="nav-link" href="{{route('admin.categories.index')}}">Catégories</a>
                 </li>
 
             @else
-                {{-- @if ($is_discounted) --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('discount.products')}}">Solde</a>
-                    </li>
-                {{-- @endif --}}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('discount.products')}}">Solde</a>
+                </li>
 
                 @foreach ($categories as $id=>$category)
                     <li class="nav-item">
@@ -36,33 +35,32 @@
             @endif
         </ul>
 
+        <div><hr class="dropdown-divider"></div>
 
+        <ul class="navbar-nav ml-auto">
+            @guest
+                @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @endif
 
-    <ul class="navbar-nav ml-auto">
-        @guest
-            @if (Route::has('login'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-            @endif
-
-            @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                </li>
-            @endif
-        @else
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }}
-                </a>
-                {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown"> --}}
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @if(Route::is('admin.*'))
                             <li>
                                 <a class="dropdown-item" href="{{route('home')}}"><i class="fas fa-tshirt go-to"></i> Home</a>
                             </li>
-                         @else
+                            @else
                             <li>
                                 <a href="{{route('admin.products.index')}}" class="dropdown-item"><i class="fas fa-table go-to"></i> Dashboard</a>
                             </li>
@@ -79,9 +77,8 @@
                             </form>
                         </li>
                     </ul>
-                {{-- </div> --}}
-            </li>
-        @endguest
-    </ul>
+                </li>
+            @endguest
+        </ul>
   </div>
 </nav>

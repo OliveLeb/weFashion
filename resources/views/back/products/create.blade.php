@@ -9,22 +9,22 @@
         <section class="col-md-6">
             <div class="form-group">
                 <label for="name">Nom : <sup class="error">*</sup></label>
-                <input type="text" class="form-control" placeholder="Nom du produit" name="name" value="{{old('name')}}">
+                <input type="text" class="form-control" placeholder="Nom du produit" name="name" value="{{old('name')}}" required>
                 @if($errors->name) <span class="error">{{$errors->first('name')}}</span> @endif
             </div>
             <div class="form-group">
                 <label for="description">Description : <sup class="error">*</sup></label>
-                <textarea name="description" class="form-control" id="" cols="30" rows="10" value="{{old('description')}}"></textarea>
+                <textarea name="description" class="form-control" id="" cols="30" rows="10" required>{{old('description')}}</textarea>
                 @if($errors->description) <span class="error">{{$errors->first('description')}}</span> @endif
             </div>
             <div class="form-group">
                 <label for="price">Prix : <sup class="error">*</sup></label>
-                <input type="number" class="form-control" name="price" id="" step="0.01">
+                <input type="number" class="form-control" name="price" id="" step="0.01" required>
                 @if($errors->price) <span class="error">{{$errors->first('price')}}</span> @endif
             </div>
             <div class="form-group">
                 <label for="reference">Référence : <sup class="error">*</sup></label>
-                <input type="text" class="form-control" name="reference" id="">
+                <input type="text" class="form-control" name="reference" id="" required>
                 @if($errors->reference) <span class="error">{{$errors->first('reference')}}</span> @endif
             </div>
         </section>

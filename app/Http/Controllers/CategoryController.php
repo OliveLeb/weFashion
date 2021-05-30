@@ -35,7 +35,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $category = Category::create($request->all());
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie correctement ajoutée !');
+
     }
 
     /**
@@ -69,7 +72,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->route('back.categories.index')->with('success', 'Catégorie correctement modifiée !');
     }
 
     /**
@@ -80,6 +84,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('back.categories.index')->with('success', 'Catégorie supprimée avec succès !');
     }
 }

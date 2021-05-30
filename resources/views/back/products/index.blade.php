@@ -2,17 +2,18 @@
 
 @section('content')
 
-<a class="btn btn-primary mb-3" href="{{route('admin.products.create')}}">Ajouter un produit</a>
 
-{{$products->links()}}
-
+<div class='admin-title mb-5'>
+    <h1>Produits</h1>
+    <a class="btn btn-primary mb-3" href="{{route('admin.products.create')}}">Ajouter un produit</a>
+</div>
 @if(Session::has('success'))
 <div class='alert'>
     <p>{{Session::get('success')}}</p>
 </div>
 @endif
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th>Titre</th>
@@ -30,7 +31,7 @@
             <td><a href="{{route('admin.products.edit',$product->id)}}">{{$product->name}}</a></td>
             <td>
                 @foreach ($product->categories as $category)
-                    {{$category->category}},
+                        {{$category->category}},
                 @endforeach
             </td>
             <td>{{$product->price}} €</td>
