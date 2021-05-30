@@ -1,4 +1,4 @@
-<footer class="container py-2">
+<footer class="container py-2 border-top">
     <div class="row">
         <ul class="col-md-4 list-group">
             <li><a href="#">Mentions légales</a></li>

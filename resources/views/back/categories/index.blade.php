@@ -47,7 +47,7 @@
                 </td>
                 <td><label for="{{'form-category-'.$category->id}}" tabindex="0" class="btn">edit</label></td>
                 <td>
-                    <form action="{{route('admin.categories.destroy',$category)}}" method="POST">
+                    <form action="{{route('admin.categories.destroy',$category)}}" method="POST" class="delete">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn"><i class="fas fa-trash-alt text-danger"></i></button>
@@ -58,4 +58,9 @@
     </tbody>
 </table>
 
+@endsection
+
+@section('scripts')
+    @parent
+    <script src="{{asset('js/confirm.js')}}"></script>
 @endsection

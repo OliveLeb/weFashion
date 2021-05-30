@@ -1,7 +1,3 @@
-{{-- @php
-    dd($products->total);
-@endphp --}}
-
 
 @if (count($products) !== 0)
 <div class='products-count'>{{$products->total()}} résultats</div>

@@ -24,6 +24,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(),
+            'is_discounted' => $this->faker->randomElement($array = array ('1','0')),
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 600),
             'reference' => $this->faker->regexify('[a-zA-Z0-9]{16}'),
         ];

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
     @if(Route::is('admin.*'))
         <span class="navbar-brand logo">We Fashion</span>
     @else
